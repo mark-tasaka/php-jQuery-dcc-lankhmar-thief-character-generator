@@ -3,6 +3,9 @@ The Dungeon Crawl Classics Lanhkmar Thief Character Generator is designed primar
 
 Several of the jQuery/JavaScript functions are stored in external files, as a means of creating greater design efficiency, with the goal of designing a program with high cohesion and low coupling. In this way, this program replicates Object-Oriented design. JSON is used to store multi-column variables, with jQuery functions used to retrieve these variables.
 
+
+Update 1.02 (2020-07-07): New files added: thievingPath.php and thiefAbilities.php.
+
 Update 1.01 (2020-07-07): An almost complete version of the DCC Lankhmar Thief Character Generator uploaded.
 
 Initial Commit (2020-07-07): DCC Lankhmar Thief Character Generator repository created.  The repository is currently empty; code will be added in the next update.
