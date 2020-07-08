@@ -44,6 +44,8 @@
     include 'php/message.php';
     include 'php/baseLanguage.php';
     include 'php/wealth.php';
+    include 'php/thievingPath.php';
+    include 'php/thiefAbilities.php';
     
 
 
@@ -74,16 +76,69 @@
             $characterName = getRandomName($gender) . " " . getSurname();
         } 
 
-        if(isset($_POST["theAlignment"]))
+        if(isset($_POST["theThievingPath"]))
         {
-            $alignment = $_POST["theAlignment"];
+            $thievingPathChoice = $_POST["theThievingPath"];
         }
-    
+
+        $thievingPath = thievingPath($thievingPathChoice);
+
+        
+        if(isset($_POST['theAlignmentCheckBox']) && $_POST['theAlignmentCheckBox'] == 1) 
+        {
+            $alignment = getAlignment($thievingPathChoice);
+        }
+        else
+        {
+            $alignment = " ";
+        } 
+  
+
         if(isset($_POST["theLevel"]))
         {
             $level = $_POST["theLevel"];
         
         } 
+
+        $backstabArray = getBackstabArray ($thievingPathChoice);
+        $backstab = $backstabArray[$level];
+ 
+        $sneakSilentlyArray = getSneakSilentlyArray ($thievingPathChoice);
+        $sneakSilently = $sneakSilentlyArray[$level];
+ 
+        $hideInShadowArray = getHideInShadowsArray ($thievingPathChoice);
+        $hideInShadows = $hideInShadowArray[$level];
+ 
+        $pickPocketArray = getHideInShadowsArray ($thievingPathChoice);
+        $pickPocket = $pickPocketArray[$level];
+ 
+        $climbArray = getClimbArray ($thievingPathChoice);
+        $climb = $climbArray[$level];
+ 
+        $pickLockArray = getPickLockArray ($thievingPathChoice);
+        $pickLock = $pickLockArray[$level];
+ 
+        $findTrapArray = getFindTrapArray ($thievingPathChoice);
+        $findTrap = $findTrapArray[$level];
+ 
+        $disableTrapArray = getDisableTrapArray ($thievingPathChoice);
+        $disableTrap = $disableTrapArray[$level];
+ 
+        $forgeDocArray = getForgeDocArray ($thievingPathChoice);
+        $forgeDoc = $forgeDocArray[$level];
+ 
+        $disguiseSelfArray = getDisguiseSelfArray ($thievingPathChoice);
+        $disguiseSelf = $disguiseSelfArray[$level];
+ 
+        $readLanguagesArray = getReadLanguagesArray ($thievingPathChoice);
+        $readLanguages = $readLanguagesArray[$level];
+ 
+        $handlePoisonArray = getHandlePoisonArray ($thievingPathChoice);
+        $handlePoison = $handlePoisonArray[$level];
+ 
+        $castSpellScrollArray = getCastSpellScrollArray ($thievingPathChoice);
+        $castSpellScroll = $castSpellScrollArray[$level];
+ 
         
         if(isset($_POST["theAbilityScore"]))
         {
@@ -331,6 +386,13 @@
                 echo $characterName;
            ?>
         </span>
+
+        
+       <span id="thievingPath">
+           <?php
+                echo $thievingPath;
+           ?>
+        </span>
        
               
          <span id="alignment">
@@ -517,6 +579,21 @@
             echo $dieRollMessage . $optimizeText;
            ?>
        </span>
+
+       
+       <span id="backstab"></span>
+       <span id="sneakSilently"></span>
+       <span id="hideInShadows"></span>
+       <span id="pickPocket"></span>
+       <span id="climb"></span>
+       <span id="pickLock"></span>
+       <span id="findTrap"></span>
+       <span id="disableTrap"></span>
+       <span id="forgeDoc"></span>
+       <span id="disguiseSelf"></span>
+       <span id="readLanguages"></span>
+       <span id="handlePoison"></span>
+       <span id="castSpellScroll"></span>
        
 
        
@@ -563,6 +640,7 @@
 			"luck": luck,
             "strengthModifer": addModifierSign(strengthMod),
             "intelligenceModifer": addModifierSign(intelligenceMod),
+            "intModCondition": addSign(intelligenceMod),
             "personalityModifer": addModifierSign(personalityMod),
             "agilityModifer": addModifierSign(agilityMod),
             "staminaModifer": addModifierSign(staminaMod),
@@ -582,6 +660,19 @@
             "reflex": <?php echo $reflexBase ?> + agilityMod + adjustRef(birthAugur, luckMod),
             "fort": <?php echo $fortBase ?> + staminaMod + adjustFort(birthAugur,luckMod),
             "will": <?php echo $willBase ?> + personalityMod + adjustWill(birthAugur, luckMod),
+            "backstab": <?php echo $backstab ?>,
+            "sneakSilently": <?php echo $sneakSilently ?> + agilityMod,
+            "hideInShadows": <?php echo $hideInShadows ?> + agilityMod,
+            "pickPocket": <?php echo $pickPocket ?> + agilityMod,
+            "climb": <?php echo $climb ?> + agilityMod,
+            "pickLock": <?php echo $pickLock ?> + agilityMod,
+            "findTrap": <?php echo $findTrap ?> + intelligenceMod,
+            "disableTrap": <?php echo $disableTrap ?> + agilityMod,
+            "forgeDoc": <?php echo $forgeDoc ?> + agilityMod,
+            "disguiseSelf": <?php echo $disguiseSelf ?> + personalityMod,
+            "readLanguages": <?php echo $readLanguages ?> + intelligenceMod,
+            "handlePoison": <?php echo $handlePoison ?>,
+            "castSpellScroll":  '<?php echo $castSpellScroll ?>',
             "initiative": agilityMod + adjustInit(birthAugur, luckMod)
 
 		};
@@ -660,6 +751,20 @@
 
       
       $("#baseAC").html("(" + data.acBase + ")");
+      
+      $("#backstab").html(addModifierSign(data.backstab));
+      $("#sneakSilently").html(addModifierSign(data.sneakSilently));
+      $("#hideInShadows").html(addModifierSign(data.hideInShadows));
+      $("#pickPocket").html(addModifierSign(data.pickPocket));
+      $("#climb").html(addModifierSign(data.climb));
+      $("#pickLock").html(addModifierSign(data.pickLock));
+      $("#findTrap").html(addModifierSign(data.findTrap));
+      $("#disableTrap").html(addModifierSign(data.disableTrap));
+      $("#forgeDoc").html(addModifierSign(data.forgeDoc));
+      $("#disguiseSelf").html(addModifierSign(data.disguiseSelf));
+      $("#readLanguages").html(addModifierSign(data.readLanguages));
+      $("#handlePoison").html(addModifierSign(data.handlePoison));
+      $("#castSpellScroll").html(data.castSpellScroll + data.intModCondition);
       
 
 	 
