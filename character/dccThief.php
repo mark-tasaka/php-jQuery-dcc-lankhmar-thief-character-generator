@@ -163,44 +163,44 @@
         {
             rsort($abilityScoreArray);
 
-            $strength = $abilityScoreArray[0];
-            $agility = $abilityScoreArray[1];
+            $strength = $abilityScoreArray[3];
+            $agility = $abilityScoreArray[0];
             $stamina = $abilityScoreArray[2];
             $personality = $abilityScoreArray[4];
             $intelligence = $abilityScoreArray[5];
-            $luck = $abilityScoreArray[3];
+            $luck = $abilityScoreArray[1];
         }
         else if($optimizeChoice == "3")
         {
             rsort($abilityScoreArray);
 
-            $strength = $abilityScoreArray[0];
-            $agility = $abilityScoreArray[2];
-            $stamina = $abilityScoreArray[1];
-            $personality = $abilityScoreArray[4];
-            $intelligence = $abilityScoreArray[5];
-            $luck = $abilityScoreArray[3];
+            $strength = $abilityScoreArray[4];
+            $agility = $abilityScoreArray[0];
+            $stamina = $abilityScoreArray[5];
+            $personality = $abilityScoreArray[1];
+            $intelligence = $abilityScoreArray[3];
+            $luck = $abilityScoreArray[2];
         }
         else if($optimizeChoice == "4")
         {
             rsort($abilityScoreArray);
 
-            $strength = $abilityScoreArray[2];
-            $agility = $abilityScoreArray[0];
-            $stamina = $abilityScoreArray[1];
-            $personality = $abilityScoreArray[4];
+            $strength = $abilityScoreArray[4];
+            $agility = $abilityScoreArray[1];
+            $stamina = $abilityScoreArray[3];
+            $personality = $abilityScoreArray[2];
             $intelligence = $abilityScoreArray[5];
-            $luck = $abilityScoreArray[3];
+            $luck = $abilityScoreArray[0];
         }
         else if($optimizeChoice == "5")
         {
             rsort($abilityScoreArray);
 
-            $strength = $abilityScoreArray[1];
-            $agility = $abilityScoreArray[3];
-            $stamina = $abilityScoreArray[2];
-            $personality = $abilityScoreArray[5];
-            $intelligence = $abilityScoreArray[4];
+            $strength = $abilityScoreArray[2];
+            $agility = $abilityScoreArray[1];
+            $stamina = $abilityScoreArray[5];
+            $personality = $abilityScoreArray[4];
+            $intelligence = $abilityScoreArray[3];
             $luck = $abilityScoreArray[0];
         }
         else

@@ -30,6 +30,8 @@ function dieRollMethodText($choice)
     }
 }
 
+
+
 function abilityScoreAssignmentText($choice)
 {
     switch($choice)
@@ -39,19 +41,19 @@ function abilityScoreAssignmentText($choice)
         break;
 
         case 2:
-            return 'and optimize the results in the order of STR, AGI, STA, LUCK, PER & INT.';
+            return 'and optimize the results in the order of AGI, LUCK, STA, STR, PER, INT.';
         break;
 
         case 3:
-            return 'and optimize the results in the order of STR, STA, AGI, LUCK, PER & INT.';
+            return 'and optimize the results in the order of AGI, PER, LUCK, INT, STR, STA';
         break;
 
         case 4:
-            return 'and optimize the results in the order of AGI, STA, STR, LUCK, PER & INT.';
+            return 'and optimize the results in the order of LUCK, AGI, PER, STA, STR, INT.';
         break;
 
         case 5:
-            return 'and optimize the results in the order of LUCK, STR, STA, AGI, INT & PER.';
+            return 'and optimize the results in the order of LUCK, AGI, STR, INT, PER, STA.';
         break;
 
         default:
